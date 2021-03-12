@@ -23,7 +23,7 @@ class BinderLaunches extends React.Component {
     // now [UTC]
     this.selectedToDT = new Date(new Date().setSeconds(0,0)).toISOString();
     this.selectedOrigin = '';
-    
+
     this.urlHash = window.location.hash;
     console.log(this.urlHash);
     if (this.urlHash) {
@@ -35,7 +35,7 @@ class BinderLaunches extends React.Component {
         for (let p of decodeURIComponent(urlHashParts[1]).split('&')) {
           if (p.startsWith('origin=')) {
             this.selectedOrigin = p.replace('origin=', '');
-          } 
+          }
           // changing page didnt work and actually page is not in the filter group, so dont update it
           // else if (p.startsWith('page=')) {
           //   this.nextPage = parseInt(p.replace('page=', ''));
@@ -189,17 +189,17 @@ class BinderLaunches extends React.Component {
     // table = (<LinearIndeterminate />);
     return (
       <Container maxWidth="lg">
-        <Grid 
-          container 
-          spacing={6} 
+        <Grid
+          container
+          spacing={6}
           direction="column"
           justify="center"
           alignItems="center"
           >
           <Grid item xs={12}>
-            <FilterForm 
-              fromDT={this.state.fromDT} 
-              toDT={this.state.toDT} 
+            <FilterForm
+              fromDT={this.state.fromDT}
+              toDT={this.state.toDT}
               origins={this.state.origins}
               isLoaded={this.state.isLoaded}
               handleSelectDateTimeChange={this.handleSelectDateTimeChange}
@@ -209,9 +209,9 @@ class BinderLaunches extends React.Component {
             />
           </Grid>
         </Grid>
-        <Grid 
-          container 
-          spacing={6} 
+        <Grid
+          container
+          spacing={6}
           direction="row"
           justify="center"
           alignItems="center"

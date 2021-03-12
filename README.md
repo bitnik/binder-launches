@@ -1,6 +1,6 @@
 This is a project to learn react js and material ui and has no purpose for production.
 
-First you have to run binder_gallery locally 
+First you have to run binder_gallery locally
 
 1. Setup the [binder_gallery](https://github.com/gesiscss/binder_gallery) by following the instructions in github repo
 2. Run `flask parse-mybinder-archives mybinder` and fill the db with some data

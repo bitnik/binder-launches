@@ -1,5 +1,5 @@
-/* 
-    https://material-ui.com/components/data-grid/ 
+/*
+    https://material-ui.com/components/data-grid/
 */
 import * as React from 'react';
 import { DataGrid, GridToolbar } from '@material-ui/data-grid';
@@ -14,11 +14,11 @@ const columns = [
 export default function LaunchesDataTable(props) {
   return (
     <div style={{ height: 800, width: '100%' }}>
-      <DataGrid 
-        rows={props.rows} 
-        columns={columns} 
+      <DataGrid
+        rows={props.rows}
+        columns={columns}
         pagination
-        pageSize={100} 
+        pageSize={100}
         rowsPerPageOptions={[100]}
         rowCount={props.rowCount}
         paginationMode="server"
