@@ -37,8 +37,8 @@ if __name__ == "__main__":
                     since = until + timedelta(1)
                 until = now.date()
             else:
-                # sleep until 00 or 02 or 04 ... 22 [UTC]
-                seconds = 7200 - time() % 7200
+                # sleep until beginning of next hour
+                seconds = 3600 - time() % 3600
                 logger.info(f"Sleeping {seconds} seconds")
                 sleep(seconds)
                 since = now.date()
