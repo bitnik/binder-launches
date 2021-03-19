@@ -30,24 +30,24 @@ def iterate_launches(archive_name: str) -> dict:
 
 
 def spec_into_parts(spec: str, provider: str) -> tuple[str, str]:
-    """Divides spec into namespace and ref.
+    """Divides spec into repo and ref.
     Based on https://github.com/gesiscss/binder_gallery/blob/cce79761c4c9f13836e60f823c357a1c2b99463b/binder_gallery/models.py#L173
     """
     if provider in ["GitHub", "Git", "GitLab"]:
-        namespace, ref = spec.rsplit("/", 1)
+        repo, ref = spec.rsplit("/", 1)
         if provider in ["Git", "GitLab"]:
-            namespace = unquote(namespace)
+            repo = unquote(repo)
     elif provider == "Gist":
         user_name, gist_id, *ref = spec.split("/", 2)
-        namespace = f"{user_name}/{gist_id}"
+        repo = f"{user_name}/{gist_id}"
         ref = ref[0] if ref else ""
     elif provider in ["Zenodo", "Figshare", "Dataverse"]:
-        namespace = spec
+        repo = spec
         ref = ""
     elif provider == "Hydroshare":
-        namespace = spec.split("/")[-1].split(".")[-1]
+        repo = spec.split("/")[-1].split(".")[-1]
         ref = ""
-    return namespace, ref
+    return repo, ref
 
 
 def transform_launch_data(launch: dict) -> dict:
@@ -61,9 +61,7 @@ def transform_launch_data(launch: dict) -> dict:
         launch["resolved_ref"] = launch.get("ref", "")
     else:
         launch["resolved_ref"] = launch["ref"]
-    launch["namespace"], launch["ref"] = spec_into_parts(
-        launch["spec"], launch["provider"]
-    )
+    launch["repo"], launch["ref"] = spec_into_parts(launch["spec"], launch["provider"])
     return launch
 
 

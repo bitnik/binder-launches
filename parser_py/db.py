@@ -36,7 +36,7 @@ class Launch(Base):
     provider = Column(String, nullable=False)
 
     spec = Column(String, nullable=False)
-    namespace = Column(String, nullable=False)
+    repo = Column(String, nullable=False)
     ref = Column(String, nullable=False)  # unresolved ref
 
     resolved_ref = Column(String, nullable=False)  # ref in archives
@@ -49,13 +49,13 @@ class Launch(Base):
     __table_args__ = (
         Index("launches_timestamp_idx", timestamp.desc()),
         Index("launches_provider_idx", provider),
-        Index("launches_namespace_idx", namespace),
+        Index("launches_repo_idx", repo),
         Index("launches_origin_idx", origin),
-        Index("launches_repo_idx", provider, namespace),
+        Index("launches_provider_repo_idx", provider, repo),
     )
 
     def __repr__(self):
-        return f"<Launch({self.provider=}, {self.namespace=}, {self.timestamp=})>"
+        return f"<Launch({self.provider=}, {self.repo=}, {self.timestamp=})>"
 
     @property
     def provider_prefix(self) -> str:

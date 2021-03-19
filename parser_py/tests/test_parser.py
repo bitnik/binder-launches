@@ -32,7 +32,7 @@ def test_iterate_launches():
 
 
 # @pytest.mark.parametrize(
-#     "provider,spec,expected_namespace,expected_ref",
+#     "provider,spec,expected_repo,expected_ref",
 #     [
 #         (
 #             "GitHub",
@@ -50,9 +50,9 @@ def test_iterate_launches():
 #         ("Zenodo", "10.22002/d1.1250", "10.22002/d1.1250", ""),
 #     ],
 # )
-# def test_spec_into_parts(provider, spec, expected_namespace, expected_ref):
-#     namespace, ref = spec_into_parts(spec, provider)
-#     assert namespace == expected_namespace
+# def test_spec_into_parts(provider, spec, expected_repo, expected_ref):
+#     repo, ref = spec_into_parts(spec, provider)
+#     assert repo == expected_repo
 #     assert ref == expected_ref
 
 
@@ -77,7 +77,7 @@ def test_iterate_launches():
                 "status": "success",
                 "origin": "mybinder.org",
                 "resolved_ref": "",
-                "namespace": "binder-examples/julia-python",
+                "repo": "binder-examples/julia-python",
                 "ref": "master",
             },
         ),
@@ -99,7 +99,7 @@ def test_iterate_launches():
                 "status": "success",
                 "origin": "mybinder.org",
                 "resolved_ref": "",
-                "namespace": "Markus28/438a1d6603d95f9e16aa121c6d0c56a8",
+                "repo": "Markus28/438a1d6603d95f9e16aa121c6d0c56a8",
                 "ref": "master",
             },
         ),
@@ -122,7 +122,7 @@ def test_iterate_launches():
                 "status": "success",
                 "origin": "gke.mybinder.org",
                 "resolved_ref": "",
-                "namespace": "pyspc/pyspc",
+                "repo": "pyspc/pyspc",
                 "ref": "master",
             },
         ),
@@ -146,7 +146,7 @@ def test_iterate_launches():
                 "status": "success",
                 "origin": "gke.mybinder.org",
                 "resolved_ref": "d22a4b0a494b25ad9e0397b44d9abc3461eb6309",
-                "namespace": "https://bitbucket.org/fsmeraldi/jupytermarking/src/master",
+                "repo": "https://bitbucket.org/fsmeraldi/jupytermarking/src/master",
                 "ref": "master",
             },
         ),
@@ -170,7 +170,7 @@ def test_iterate_launches():
                 "status": "success",
                 "origin": "gke.mybinder.org",
                 "resolved_ref": "4049787",
-                "namespace": "10.5281/zenodo.4032875",
+                "repo": "10.5281/zenodo.4032875",
                 "ref": "",
             },
         ),
@@ -194,7 +194,7 @@ def test_iterate_launches():
                 "status": "success",
                 "origin": "gke.mybinder.org",
                 "resolved_ref": "8f7c2f0341ef4180b0dbe97f59130756.v1587139888",
-                "namespace": "8f7c2f0341ef4180b0dbe97f59130756",
+                "repo": "8f7c2f0341ef4180b0dbe97f59130756",
                 "ref": "",
             },
         ),

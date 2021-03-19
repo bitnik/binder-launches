@@ -19,7 +19,7 @@ def db_session():
 #             "schema": "binderhub.jupyter.org/launch",
 #             "version": 4,
 #             "provider": "GitHub",
-#             "namespace": "RasaHQ/rasa_core",
+#             "repo": "RasaHQ/rasa_core",
 #             "ref": "0.13.x",
 #             "resolved_ref": "85f59f3a645750f67a4a231dd422de1d0a2766f3",
 #             "status": "success",
@@ -31,7 +31,7 @@ def db_session():
 #             "version": 3,
 #             "provider":
 #             "Zenodo",
-#             "namespace": "10.22002/d1.1250",
+#             "repo": "10.22002/d1.1250",
 #             "ref": "",
 #             "resolved_ref": "",
 #             "status": "success",
