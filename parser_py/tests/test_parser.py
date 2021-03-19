@@ -1,6 +1,7 @@
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
+from datetime import timezone
 
 import pytest
 
@@ -68,7 +69,7 @@ def test_iterate_launches():
                 "status": "success",
             },
             {
-                "timestamp": datetime(2019, 3, 8, 20, 7, 0),
+                "timestamp": datetime(2019, 3, 8, 20, 7, 0, tzinfo=timezone.utc),
                 "schema": "binderhub.jupyter.org/launch",
                 "version": 1,
                 "provider": "GitHub",
@@ -90,7 +91,7 @@ def test_iterate_launches():
                 "status": "success",
             },
             {
-                "timestamp": datetime(2019, 4, 2, 18, 11, 0),
+                "timestamp": datetime(2019, 4, 2, 18, 11, 0, tzinfo=timezone.utc),
                 "schema": "binderhub.jupyter.org/launch",
                 "version": 2,
                 "provider": "Gist",
@@ -113,7 +114,7 @@ def test_iterate_launches():
                 "origin": "gke.mybinder.org",
             },
             {
-                "timestamp": datetime(2019, 6, 12, 22, 37, 0),
+                "timestamp": datetime(2019, 6, 12, 22, 37, 0, tzinfo=timezone.utc),
                 "schema": "binderhub.jupyter.org/launch",
                 "version": 3,
                 "provider": "GitLab",
@@ -137,7 +138,7 @@ def test_iterate_launches():
                 "origin": "gke.mybinder.org",
             },
             {
-                "timestamp": datetime(2020, 6, 18, 16, 49, 0),
+                "timestamp": datetime(2020, 6, 18, 16, 49, 0, tzinfo=timezone.utc),
                 "schema": "binderhub.jupyter.org/launch",
                 "version": 4,
                 "provider": "Git",
@@ -161,7 +162,7 @@ def test_iterate_launches():
                 "origin": "gke.mybinder.org",
             },
             {
-                "timestamp": datetime(2021, 3, 11, 5, 17, 0),
+                "timestamp": datetime(2021, 3, 11, 5, 17, 0, tzinfo=timezone.utc),
                 "schema": "binderhub.jupyter.org/launch",
                 "version": 4,
                 "provider": "Zenodo",
@@ -185,7 +186,7 @@ def test_iterate_launches():
                 "origin": "gke.mybinder.org",
             },
             {
-                "timestamp": datetime(2020, 6, 18, 17, 21, 0),
+                "timestamp": datetime(2020, 6, 18, 17, 21, 0, tzinfo=timezone.utc),
                 "schema": "binderhub.jupyter.org/launch",
                 "version": 4,
                 "provider": "Hydroshare",

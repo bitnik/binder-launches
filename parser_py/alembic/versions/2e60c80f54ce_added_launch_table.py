@@ -24,7 +24,7 @@ def upgrade():
     op.create_table(
         "launches",
         # sa.Column('id', sa.Integer(), nullable=False),
-        sa.Column("timestamp", sa.DateTime(), nullable=False),
+        sa.Column("timestamp", sa.DateTime(timezone=True), nullable=False),
         sa.Column("provider", sa.String(), nullable=False),
         sa.Column("spec", sa.String(), nullable=False),
         sa.Column("namespace", sa.String(), nullable=False),

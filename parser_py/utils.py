@@ -60,7 +60,12 @@ def bulk_insert(
         session = make_session()
 
     if delete_old is True:
-        session.query(Launch).filter(func.date(Launch.timestamp) == delete_date).delete(
+        # session.query(Launch).filter(func.date(Launch.timestamp) == delete_date).delete(
+        #     synchronize_session=False
+        # )
+        session.query(Launch).filter(
+            Launch.timestamp >= f"{delete_date} 00:00:00+00"
+        ).filter(Launch.timestamp <= f"{delete_date} 23:59:00+00").delete(
             synchronize_session=False
         )
 

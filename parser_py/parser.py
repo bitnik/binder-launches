@@ -51,10 +51,8 @@ def spec_into_parts(spec: str, provider: str) -> tuple[str, str]:
 
 
 def transform_launch_data(launch: dict) -> dict:
-    # timestamp is always in UTC, so we dont need to save timezone info in database
-    launch["timestamp"] = datetime.fromisoformat(launch["timestamp"]).replace(
-        tzinfo=None
-    )
+    # timestamp is always in UTC
+    launch["timestamp"] = datetime.fromisoformat(launch["timestamp"])
     # origin info is added at 12.06.2019 (version 3)
     if launch["timestamp"].date() <= date(2019, 6, 12):
         launch["origin"] = launch.get("origin", "mybinder.org")

@@ -32,7 +32,7 @@ class Launch(Base):
     # this is a fake primary key for sqlalchemy only, it doesnt exist in db
     id = Column(Integer, primary_key=True)
 
-    timestamp = Column(DateTime, nullable=False)
+    timestamp = Column(DateTime(timezone=True), nullable=False)
     provider = Column(String, nullable=False)
 
     spec = Column(String, nullable=False)

@@ -15,7 +15,7 @@ def db_session():
 # def bulk_data():
 #     return [
 #         {
-#             "timestamp": datetime.fromisoformat("2021-03-04T00:00:00+00:00").replace(tzinfo=None),
+#             "timestamp": datetime.fromisoformat("2021-03-04T00:00:00+00:00"),
 #             "schema": "binderhub.jupyter.org/launch",
 #             "version": 4,
 #             "provider": "GitHub",
@@ -26,7 +26,7 @@ def db_session():
 #             "origin": "ovh.mybinder.org"
 #             },
 #         {
-#             "timestamp": datetime.fromisoformat("2019-06-28T17:24:00+00:00").replace(tzinfo=None),
+#             "timestamp": datetime.fromisoformat("2019-06-28T17:24:00+00:00"),
 #             "schema": "binderhub.jupyter.org/launch",
 #             "version": 3,
 #             "provider":
