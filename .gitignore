@@ -24,5 +24,10 @@ yarn-error.log*
 
 __pycache__
 .pytest_cache
-parser_py/parser.ini
 .coverage
+
+# parser config
+parser_py/parser.ini
+
+# node server config
+server/config.js

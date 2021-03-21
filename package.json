@@ -1,21 +1,42 @@
 {
   "name": "binder-launches",
   "version": "0.1.0",
+  "description": "A parser to parse mybinder.org launch events and a react table to view them.",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitnik/binder-launches.git"
+  },
+  "keywords": [
+    "binder",
+    "launches",
+    "table",
+    "react",
+    "material"
+  ],
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/data-grid": "^4.0.0-alpha.21",
     "@material-ui/icons": "^4.11.2",
+    "express": "^4.17.1",
+    "express-pino-logger": "^6.0.0",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "pino": "^6.11.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.3"
+    "react-scripts": "4.0.3",
+    "sequelize": "^6.5.1",
+    "sequelize-cli": "^6.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run build && node server/server.js",
+    "start-client": "react-scripts start",
+    "start-server": "node server/server.js",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -33,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "pino-pretty": "^4.7.1"
   }
 }
