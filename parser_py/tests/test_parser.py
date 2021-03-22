@@ -230,15 +230,15 @@ def test_bulk_insert_with_delete(db_session):
     for launch in iterate_launches(archive_name):
         launch = transform_launch_data(launch)
         bulk_data.append(launch)
-    assert len(bulk_data) == 13290
+    assert len(bulk_data) == 13290, "count of input data"
     bulk_insert(bulk_data, session=db_session)
 
     c = get_launches_count(db_session)
-    assert c == 13290
+    assert c == 13290, "count after bulk insert"
 
     bulk_insert(
         bulk_data, delete_old=True, delete_date=date(2020, 3, 8), session=db_session
     )
 
     c = get_launches_count(db_session)
-    assert c == 13290
+    assert c == 13290, "count after bulk insert with delete"

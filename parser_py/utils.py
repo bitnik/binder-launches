@@ -62,14 +62,14 @@ def bulk_insert(
         session = make_session()
 
     if delete_old is True:
-        # session.query(Launch).filter(func.date(Launch.timestamp) == delete_date).delete(
-        #     synchronize_session=False
-        # )
-        session.query(Launch).filter(
-            Launch.timestamp >= f"{delete_date} 00:00:00+00"
-        ).filter(Launch.timestamp <= f"{delete_date} 23:59:00+00").delete(
+        session.query(Launch).filter(func.date(Launch.timestamp) == delete_date).delete(
             synchronize_session=False
         )
+        # session.query(Launch).filter(
+        #     Launch.timestamp >= f"{delete_date} 00:00:00+00"
+        # ).filter(Launch.timestamp <= f"{delete_date} 23:59:00+00").delete(
+        #     synchronize_session=False
+        # )
 
     # https://docs.sqlalchemy.org/en/13/orm/session_api.html#sqlalchemy.orm.session.Session.bulk_insert_mappings
     session.bulk_insert_mappings(Launch, launches)

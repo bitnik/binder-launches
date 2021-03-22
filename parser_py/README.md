@@ -2,7 +2,7 @@
 
 1. First of all you have to [install the TimescaleDB](https://docs.timescale.com/latest/getting-started/installation) and
 then [set it up](https://docs.timescale.com/latest/getting-started/setup).
-Note that setting default timezone in PostgreSQL to UTC would be useful for this application: `SET TIME ZONE 'UTC';`
+Note that you also have to set default timezone in PostgreSQL: `SET TIME ZONE 'UTC';`
 
 2. Then create a virtual env with min Python 3.9 and
 then install the requirements:
