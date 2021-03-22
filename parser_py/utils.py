@@ -5,6 +5,7 @@ from subprocess import check_call
 from typing import Optional
 
 from sqlalchemy import create_engine
+from sqlalchemy import exc
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker
@@ -78,10 +79,12 @@ def bulk_insert(
 def get_last_launch_timestamp(session: Optional[Session] = None) -> int:
     if session is None:
         session = make_session()
-
-    last_launch_timestamp = (
-        session.query(Launch.timestamp).order_by(Launch.timestamp.desc()).first()
-    )
+    try:
+        last_launch_timestamp = (
+            session.query(Launch.timestamp).order_by(Launch.timestamp.desc()).first()
+        )
+    except exc.ProgrammingError:
+        return None
     if last_launch_timestamp:
         last_launch_timestamp = last_launch_timestamp[0].astimezone(timezone.utc)
     return last_launch_timestamp
