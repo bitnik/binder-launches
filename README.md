@@ -1,43 +1,13 @@
-This is a project to learn react js and material ui and has no purpose for production.
+This repo contains
 
-First you have to run binder_gallery locally
+1. a tool to parse [binder launch events](https://mybinder-sre.readthedocs.io/en/latest/analytics/events-archive.html) and
+save into [TimescaleDB](https://docs.timescale.com/latest/main)
+2. a frontend to visualize them using [React](https://reactjs.org/) with [Material-UI](https://material-ui.com/) which is backed by
+[Express.js](https://expressjs.com/)
 
-1. Setup the [binder_gallery](https://github.com/gesiscss/binder_gallery) by following the instructions in github repo
-2. Run `flask parse-mybinder-archives mybinder` and fill the db with some data
-3. Install and enable [flask-cors](https://flask-cors.readthedocs.io/en/latest/)
-4. You may also need to increase API limiter
-5. When everything is ready, `flask run` and test the API (http://127.0.0.1:5000/gallery/api/v1.0/)
+## Local development
 
-Now you can run the react app in dev mode
-
-1. Install JS packages with `npm install`
-2. Run `nom start` and it will be available at http://localhost:3000
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. First you have to [set up and run the parser](parser_py#local-development), so that you have some data to visualize.
+2. Install JS packages with `npm install`
+3. Start the node server with `npm run start-server`
+4. Start the react app in dev mode with `npm run start-client` and then it will be available at [http://localhost:3000](http://localhost:3000)
