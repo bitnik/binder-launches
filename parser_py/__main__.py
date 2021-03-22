@@ -7,6 +7,7 @@ from .parser import parse
 from .utils import upgrade_db
 from parser_py import continuous
 from parser_py import db_upgrade
+from parser_py import delete_old as _delete_old
 from parser_py import logger
 from parser_py import since
 from parser_py import until
@@ -16,7 +17,7 @@ if __name__ == "__main__":
         logger.info("Upgrading database")
         upgrade_db()
 
-    delete_old = False
+    delete_old = _delete_old
     while True:
         logger.debug(f"parse: {since=}, {until=}, {delete_old=}")
         parse(since, until, delete_old)
@@ -34,6 +35,7 @@ if __name__ == "__main__":
                     logger.info("Sleeping until 2 am [UTC]")
                     sleep(7200 - seconds_diff)
                 else:
+                    # add 1 day
                     since = until + timedelta(1)
                 until = now.date()
             else:

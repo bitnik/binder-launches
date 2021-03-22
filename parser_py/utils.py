@@ -1,5 +1,6 @@
 import os
 from datetime import date
+from datetime import timezone
 from subprocess import check_call
 from typing import Optional
 
@@ -72,3 +73,15 @@ def bulk_insert(
     # https://docs.sqlalchemy.org/en/13/orm/session_api.html#sqlalchemy.orm.session.Session.bulk_insert_mappings
     session.bulk_insert_mappings(Launch, launches)
     session.commit()
+
+
+def get_last_launch_timestamp(session: Optional[Session] = None) -> int:
+    if session is None:
+        session = make_session()
+
+    last_launch_timestamp = (
+        session.query(Launch.timestamp).order_by(Launch.timestamp.desc()).first()
+    )
+    if last_launch_timestamp:
+        last_launch_timestamp = last_launch_timestamp[0].astimezone(timezone.utc)
+    return last_launch_timestamp
