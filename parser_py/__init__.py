@@ -10,7 +10,7 @@ config = configparser.ConfigParser()
 config.read(parser_config)
 
 # default
-if config["default"]["debug"]:
+if "debug" in config["default"]:
     debug = config["default"].getboolean("debug")
 else:
     debug = False
@@ -27,7 +27,7 @@ logger.debug(f"{debug=}")
 # database
 db_url = os.getenv("DB_URL", config["database"]["url"])
 # if first time, upgrade must be True
-if config["database"]["upgrade"]:
+if "upgrade" in config["database"]:
     db_upgrade = config["database"].getboolean("upgrade")
 else:
     db_upgrade = True
@@ -39,7 +39,7 @@ from .utils import get_last_launch_timestamp
 
 # parser
 # to delete the old data of each archive if there is any before inserting new data
-if config["parser"]["delete_old"]:
+if "delete_old" in config["parser"]:
     delete_old = config["parser"].getboolean("delete_old")
 else:
     delete_old = False
@@ -59,7 +59,7 @@ if since > until:
     raise ValueError(f"Since date ({since}) can't be after until date ({until}).")
 # to parse continuously every hour
 # first time run with false, when first huge parsing finishes, then re-deploy with true
-if config["parser"]["continuous"]:
+if "continuous" in config["parser"]:
     continuous = config["parser"].getboolean("continuous")
 else:
     continuous = False
