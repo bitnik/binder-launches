@@ -85,16 +85,16 @@ python -m pytest --cov=parser_py parser_py/tests/ -v
 Commands to [create a database and initilize the timescaledb extension](https://docs.timescale.com/latest/getting-started/setup):
 
 ```sql
--- to get the current timezone setting
-SELECT * FROM pg_timezone_names WHERE name = current_setting('TIMEZONE');
--- to set the timezone to UTC
-SET TIME ZONE 'UTC';
-
 CREATE DATABASE binderevent;
 \c binderevent
 CREATE EXTENSION IF NOT EXISTS timescaledb;
 -- list extensions
 \dx
+
+-- to get the current timezone setting
+SELECT * FROM pg_timezone_names WHERE name = current_setting('TIMEZONE');
+-- to set the timezone to UTC
+SET TIME ZONE 'UTC';
 ```
 
 #### Migrations
