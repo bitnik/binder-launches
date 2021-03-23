@@ -2,9 +2,22 @@ const express = require('express');
 const { Sequelize, DataTypes, Op } = require('sequelize');
 const path = require("path");
 const _Launch = require("./launches");
-const config = require("./config")
 const pino = require('pino');
 const expressPino = require('express-pino-logger');
+const fs = require('fs');
+
+let config;
+if (fs.existsSync(path.join(__dirname, 'config.js'))) {
+    config = require('./config');
+    if (!('debug' in config)) {
+        config['debug'] = true;
+    }
+    if (!('port' in config)) {
+        config['port'] = 3001;
+    }
+} else {
+    throw 'Please provide "config.js" for configuration.';
+}
 
 // https://getpino.io/#/docs/api?id=options
 const logger = pino({
