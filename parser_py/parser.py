@@ -1,14 +1,15 @@
 #!/usr/bin/env python3.9
 """Script to parse mybinder launch events."""
-import argparse
 import json
 from datetime import date
 from datetime import datetime
 from urllib.parse import unquote
 from urllib.request import urlopen
 
+from .settings import logger
+from .settings import settings
 from .utils import bulk_insert
-from parser_py import logger
+from .utils import make_session
 
 
 def iterate_archives() -> dict:
@@ -66,6 +67,8 @@ def transform_launch_data(launch: dict) -> dict:
 
 
 def parse(since: date, until: date, delete_old: bool = False) -> None:
+    session = make_session(settings["db_url"])
+
     for archive in iterate_archives():
         archive_date = datetime.strptime(archive["date"], "%Y-%m-%d").date()
         if since <= archive_date <= until:
@@ -74,28 +77,4 @@ def parse(since: date, until: date, delete_old: bool = False) -> None:
             for launch in iterate_launches(archive["name"]):
                 launches.append(transform_launch_data(launch))
             logger.info(f"{len(launches)=}")
-            bulk_insert(launches, delete_old, archive_date)
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "-s, --since",
-        dest="since",
-        type=str,
-        default="2018-11-03",
-        required=False,
-        help='Since which date you want to start parsin. Format: "YYYY-MM-SS".',
-    )
-    parser.add_argument(
-        "-u, --until",
-        dest="until",
-        type=str,
-        default=str(date.today()),
-        required=False,
-        help='Until which date you want to start parsin. Format: "YYYY-MM-SS".',
-    )
-    args = parser.parse_args()
-    since = datetime.strptime(args.since, "%Y-%m-%d").date()
-    until = datetime.strptime(args.until, "%Y-%m-%d").date()
-    parse(since, until)
+            bulk_insert(launches, delete_old, archive_date, session=session)

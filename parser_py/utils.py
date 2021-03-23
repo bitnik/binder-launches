@@ -12,12 +12,9 @@ from sqlalchemy.orm import sessionmaker
 
 from .db import Base
 from .db import Launch
-from parser_py import db_url
 
 
-def make_session(
-    db_url: str = db_url, create_all: bool = False, echo: bool = False
-) -> Session:
+def make_session(db_url: str, create_all: bool = False, echo: bool = False) -> Session:
     """Returns a database session.
     If create_all is True, it first creates all tables and then returns a session.
     """
@@ -44,9 +41,13 @@ def upgrade_db() -> None:
     )
 
 
-def get_launches_count(session: Optional[Session] = None) -> int:
+def get_launches_count(
+    session: Optional[Session] = None, db_url: Optional[str] = None
+) -> int:
     if session is None:
-        session = make_session()
+        if db_url is None:
+            raise ValueError("session or db_url must be passed.")
+        session = make_session(db_url)
 
     count = session.query(func.count("*")).select_from(Launch).scalar()
     return count
@@ -57,28 +58,37 @@ def bulk_insert(
     delete_old: bool = False,
     delete_date: Optional[date] = None,
     session: Optional[Session] = None,
+    db_url: Optional[str] = None,
 ) -> None:
     if session is None:
-        session = make_session()
+        if db_url is None:
+            raise ValueError("session or db_url must be passed.")
+        session = make_session(db_url)
 
     if delete_old is True:
-        session.query(Launch).filter(func.date(Launch.timestamp) == delete_date).delete(
-            synchronize_session=False
-        )
-        # session.query(Launch).filter(
-        #     Launch.timestamp >= f"{delete_date} 00:00:00+00"
-        # ).filter(Launch.timestamp <= f"{delete_date} 23:59:00+00").delete(
+        # session.query(Launch).filter(func.date(Launch.timestamp) == str(delete_date)).delete(
         #     synchronize_session=False
         # )
+        session.query(Launch).filter(
+            Launch.timestamp >= f"{delete_date} 00:00:00+00"
+        ).filter(Launch.timestamp <= f"{delete_date} 23:59:59+00").delete(
+            synchronize_session=False
+        )
+        # session.commit()
 
     # https://docs.sqlalchemy.org/en/13/orm/session_api.html#sqlalchemy.orm.session.Session.bulk_insert_mappings
     session.bulk_insert_mappings(Launch, launches)
     session.commit()
 
 
-def get_last_launch_timestamp(session: Optional[Session] = None) -> int:
+def get_last_launch_timestamp(
+    session: Optional[Session] = None, db_url: Optional[str] = None
+) -> int:
     if session is None:
-        session = make_session()
+        if db_url is None:
+            raise ValueError("session or db_url must be passed.")
+        session = make_session(db_url)
+
     try:
         last_launch_timestamp = (
             session.query(Launch.timestamp).order_by(Launch.timestamp.desc()).first()

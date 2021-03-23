@@ -4,24 +4,24 @@ from time import sleep
 from time import time
 
 from .parser import parse
+from .settings import load_settings
 from .utils import upgrade_db
-from parser_py import continuous
-from parser_py import db_upgrade
-from parser_py import delete_old as _delete_old
-from parser_py import logger
-from parser_py import since
-from parser_py import until
 
 if __name__ == "__main__":
-    if db_upgrade:
+    settings = load_settings()
+    logger = settings["logger"]
+
+    if settings["db_upgrade"]:
         logger.info("Upgrading database")
         upgrade_db()
 
-    delete_old = _delete_old
+    delete_old = settings["delete_old"]
+    since = settings["since"]
+    until = settings["until"]
     while True:
         logger.debug(f"parse: {since=}, {until=}, {delete_old=}")
         parse(since, until, delete_old)
-        if continuous:
+        if settings["continuous"]:
             delete_old = True
             now = datetime.utcnow()
             days_diff = (now.date() - until).days

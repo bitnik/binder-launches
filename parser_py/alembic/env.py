@@ -23,9 +23,10 @@ target_metadata = db.Base.metadata
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
-from parser_py import db_url
+from parser_py.settings import load_settings
 
-config.set_main_option("sqlalchemy.url", db_url)
+settings = load_settings()
+config.set_main_option("sqlalchemy.url", settings["db_url"])
 
 
 def run_migrations_offline():

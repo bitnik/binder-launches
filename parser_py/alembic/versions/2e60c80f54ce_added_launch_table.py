@@ -8,8 +8,7 @@ Create Date: 2021-03-12 19:30:41.277172
 import sqlalchemy as sa
 from alembic import op
 
-from parser_py import chunk_time_interval
-from parser_py import data_retention_interval
+from parser_py.settings import load_settings
 
 
 # revision identifiers, used by Alembic.
@@ -38,6 +37,9 @@ def upgrade():
     )
 
     ###### TimeScale DB
+    settings = load_settings()
+    chunk_time_interval = settings["chunk_time_interval"]
+    data_retention_interval = settings["data_retention_interval"]
     # https://docs.timescale.com/latest/getting-started/creating-hypertables
     # https://docs.timescale.com/latest/api#create_hypertable
     op.execute(
