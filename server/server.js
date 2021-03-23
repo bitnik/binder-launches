@@ -10,7 +10,7 @@ let config;
 if (fs.existsSync(path.join(__dirname, 'config.js'))) {
     config = require('./config');
     if (!('debug' in config)) {
-        config['debug'] = true;
+        config['debug'] = false;
     }
     if (!('port' in config)) {
         config['port'] = 3001;
