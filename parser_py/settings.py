@@ -19,6 +19,11 @@ def load_settings() -> dict:
     config = configparser.ConfigParser()
     config.read(parser_config)
 
+    sections = ["default", "database", "parser"]
+    for section in sections:
+        if section not in config:
+            config[section] = {}
+
     # default
     if "debug" in config["default"]:
         debug = config["default"].getboolean("debug")
@@ -32,15 +37,17 @@ def load_settings() -> dict:
     logger.debug(f"{debug=}")
 
     # database
-    db_url = os.getenv("DB_URL", config["database"]["url"])
+    if "url" not in config["database"]:
+        raise ValueError("Database url is a required config.")
+    db_url = config["database"]["url"]
     # if first time, upgrade must be True
     if "upgrade" in config["database"]:
         db_upgrade = config["database"].getboolean("upgrade")
     else:
         db_upgrade = True
-    chunk_time_interval = config["database"]["chunk_time_interval"] or "1 month"
-    data_retention_interval = (
-        config["database"]["data_retention_interval"] or "12 months"
+    chunk_time_interval = config["database"].get("chunk_time_interval", "1 month")
+    data_retention_interval = config["database"].get(
+        "data_retention_interval", "12 months"
     )
     logger.debug(f"{db_upgrade=}, {chunk_time_interval=}, {data_retention_interval=}")
 
@@ -51,14 +58,14 @@ def load_settings() -> dict:
     else:
         delete_old = False
     last_launch_timestamp = get_last_launch_timestamp(db_url=db_url)
-    since = config["parser"]["since"] or last_launch_timestamp or "2018-11-03"
+    since = config["parser"].get("since", last_launch_timestamp or "2018-11-03")
     if type(since) == datetime:
         # since is last_launch_timestamp
         since = since.date()
         delete_old = True
     else:
         since = datetime.strptime(since, "%Y-%m-%d").date()
-    until = config["parser"]["until"] or str(date.today())
+    until = config["parser"].get("until", str(date.today()))
     until = datetime.strptime(until, "%Y-%m-%d").date()
     if until > date.today():
         raise ValueError(f"Until date ({until}) can't be after today's date.")
