@@ -2,7 +2,7 @@ name: "docker build & push"
 
 on:
   push:
-    branches: [ test ]
+    branches: [ main ]
 
 jobs:
   docker:
