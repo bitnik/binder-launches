@@ -2,7 +2,7 @@ name: "docker build & push"
 
 on:
   push:
-    branches: [ main ]
+    branches: [ test ]
 
 jobs:
   docker:
@@ -17,23 +17,24 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      - name: GitHub Environment Variables Action
+        # to get CI_SHA_SHORT env variable
+        uses: FranzDiebold/github-env-vars-action@v2.1.0
       - name: Build and push parser_py
         id: docker_build_parser_py
         uses: docker/build-push-action@v2
         with:
-          context: .
           file: ./helm_chart/images/parser_py/Dockerfile
           push: true
-          tags: bitnik/binder-launches-parser-py:${GITHUB_SHA}
+          tags: bitnik/binder-launches-parser-py:${{ env.CI_SHA_SHORT }}
       - name: Image digest
         run: echo ${{ steps.docker_build_parser_py.outputs.digest }}
       - name: Build and push react app
         id: docker_build_react
         uses: docker/build-push-action@v2
         with:
-          context: .
           file: ./helm_chart/images/binder_launches/Dockerfile
           push: true
-          tags: bitnik/binder-launches:${GITHUB_SHA}
+          tags: bitnik/binder-launches:${{ env.CI_SHA_SHORT }}
       - name: Image digest
         run: echo ${{ steps.docker_build_react.outputs.digest }}
