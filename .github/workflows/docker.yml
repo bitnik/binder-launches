@@ -24,7 +24,7 @@ jobs:
           context: .
           file: ./helm_chart/images/parser_py/Dockerfile
           push: true
-          tags: bitnik/binder-launches-parser-py:$GITHUB_SHA
+          tags: bitnik/binder-launches-parser-py:${{GITHUB_SHA}}
       - name: Image digest
         run: echo ${{ steps.docker_build_parser_py.outputs.digest }}
       - name: Build and push react app
@@ -34,6 +34,6 @@ jobs:
           context: .
           file: ./helm_chart/images/binder_launches/Dockerfile
           push: true
-          tags: bitnik/binder-launches:$GITHUB_SHA
+          tags: bitnik/binder-launches:${{GITHUB_SHA}}
       - name: Image digest
         run: echo ${{ steps.docker_build_react.outputs.digest }}
