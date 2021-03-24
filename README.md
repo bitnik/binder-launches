@@ -5,6 +5,8 @@ save into [TimescaleDB](https://docs.timescale.com/latest/main)
 2. a frontend to visualize launches using [React](https://reactjs.org/) with [Material-UI](https://material-ui.com/) which is backed by
 [Express.js](https://expressjs.com/)
 
+![bl](https://user-images.githubusercontent.com/6059799/112322902-97465100-8cb1-11eb-93e3-88dd3da3d35b.gif)
+
 ## Local development
 
 1. First you have to [set up and run the parser](parser_py#local-development), so that you have some data to visualize.
