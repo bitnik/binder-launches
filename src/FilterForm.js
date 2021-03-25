@@ -12,6 +12,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -36,6 +38,11 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  orderSwitch: {
+    display: 'block',
+    textAlign: 'center',
+    marginLeft: 0,
+  },
 }));
 
 function DateAndTimePicker(props) {
@@ -53,6 +60,31 @@ function DateAndTimePicker(props) {
       }}
       onChange={props.onChange}
   />
+  );
+}
+
+function OrderSwitch(props) {
+  const classes = useStyles();
+  const [state, setState] = React.useState(props.defaultValue);
+
+  const handleChange = (event) => {
+    setState(event.target.checked);
+  };
+
+  return (
+      <FormControlLabel
+        className={classes.orderSwitch}
+        control={
+          <Switch
+            checked={state}
+            onChange={handleChange}
+            id={props.id}
+            name={props.id}
+            color="primary"
+          />
+        }
+        label="DESC"
+      />
   );
 }
 
@@ -218,6 +250,10 @@ export default function FilterForm(props) {
           label="To"
           defaultValue={props.toDT}
           onChange={props.handleSelectDateTimeChange}
+        />
+        <OrderSwitch
+          id="order-switch"
+          defaultValue={['false', '0'].indexOf(props.descOrder) === -1}
         />
       </FormControl>
 

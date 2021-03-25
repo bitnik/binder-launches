@@ -154,16 +154,17 @@ app.get('/launches', function(req, res) {
     }
     logger.debug(page, offset, limit_);
     // query
+    const order_ = ('desc' in req.query && ['false', '0'].indexOf(req.query.desc.toLowerCase()) >= 0) ? 'asc' : 'desc';
     let query = {
         where: filters,
         offset: offset,
         limit: limit_,
-        order: [[sequelize.col('timestamp'), 'DESC']]
+        order: [[sequelize.col('timestamp'), order_]]
     };
     if (groupby.length > 0) {
         query['attributes'] = groupbyAttributes;
         query['group'] = groupby;
-        query['order'] = [[sequelize.col('count'), 'DESC']];
+        query['order'] = [[sequelize.col('count'), order_]];
     }
     Launch.findAll(
         query

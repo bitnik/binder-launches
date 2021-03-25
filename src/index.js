@@ -35,6 +35,7 @@ class BinderLaunches extends React.Component {
     this.selectedFromDT = dateToYMD(this.selectedFromDT) + 'T' + this.selectedFromDT.toLocaleString('en-GB').split(', ')[1];
     this.selectedToDT = new Date(new Date().setSeconds(0,0));
     this.selectedToDT = dateToYMD(this.selectedToDT) + 'T' + this.selectedToDT.toLocaleString('en-GB').split(', ')[1];
+    this.descOrder = true;
     this.selectedOrigins = [];
     this.selectedProviders = [];
     this.firstLaunchTS = null;
@@ -54,6 +55,10 @@ class BinderLaunches extends React.Component {
       const toParam = url.searchParams.get('to');
       if (toParam !== null) {
         this.selectedToDT = toParam;
+      }
+      const descParam = url.searchParams.get('desc');
+      if (descParam !== null) {
+        this.descOrder = descParam.toLowerCase();
       }
       const originsParam = url.searchParams.get('origins');
       if (originsParam !== null) {
@@ -84,6 +89,7 @@ class BinderLaunches extends React.Component {
       isLoaded: false,
       fromDT: this.selectedFromDT,
       toDT: this.selectedToDT,
+      descOrder: this.descOrder,
       selectedOrigins: this.selectedOrigins,
       selectedProviders: this.selectedProviders,
       selectedRepo: this.selectedRepo,
@@ -110,6 +116,7 @@ class BinderLaunches extends React.Component {
   fetchData(page=null) {
     // get selected values and construct the url
     let urlPart = '?from=' + encodeURIComponent(this.state.fromDT) + '&to=' + encodeURIComponent(this.state.toDT);
+    urlPart = urlPart + '&desc=' + String(this.descOrder);
     if (this.selectedOrigins.length) {
       urlPart = urlPart + '&origins=' + this.selectedOrigins.join(',');
     }
@@ -235,10 +242,12 @@ class BinderLaunches extends React.Component {
 
   handleRefresh() {
     this.setSelectedRepo();
+    this.descOrder = document.getElementById("order-switch").checked;
     this.selectedGroupBy = document.getElementById("groupby-select").value;
     this.setState({
       fromDT: this.selectedFromDT,
       toDT: this.selectedToDT,
+      descOrder: this.descOrder,
       selectedOrigins: this.selectedOrigins,
       selectedProviders: this.selectedProviders,
       selectedRepo: this.selectedRepo,
@@ -317,6 +326,7 @@ class BinderLaunches extends React.Component {
             <FilterForm
               fromDT={this.state.fromDT}
               toDT={this.state.toDT}
+              descOrder={this.state.descOrder}
               origins={this.state.origins}
               providers={this.state.providers}
               selectedOrigins={this.state.selectedOrigins}
