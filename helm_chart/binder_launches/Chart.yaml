@@ -1,0 +1,16 @@
+apiVersion: v2
+name: binder_launches
+version: 0.1.0
+appVersion: "0.1.0"
+# kubeVersion: A SemVer range of compatible Kubernetes versions (optional)
+description: A Helm chart for Kubernetes
+type: application
+keywords:
+  - binder
+  - launches
+  - table
+  - react
+  - material
+home: https://github.com/bitnik/binder_launches
+sources:
+  - A https://github.com/bitnik/binder_launches

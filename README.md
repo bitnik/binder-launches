@@ -7,6 +7,10 @@ save into [TimescaleDB](https://docs.timescale.com/latest/main)
 
 ![bl](https://user-images.githubusercontent.com/6059799/112322902-97465100-8cb1-11eb-93e3-88dd3da3d35b.gif)
 
+## Helm chart
+
+If you want to install it as helm chart, have a look at the [documentation for helm chart](helm_chart).
+
 ## Local development
 
 1. First you have to [set up and run the parser](parser_py#local-development), so that you have some data to visualize.

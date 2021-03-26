@@ -1,0 +1,67 @@
+debug: false
+replicaCount: 1
+image:
+  repository: "bitnik/binder-launches"
+  tag: "9ca23e37"
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+  nodePort:
+
+resources:
+  requests:
+    cpu: "0.5"
+    memory: 512Mi
+  limits:
+    cpu: "1"
+    memory: 1Gi
+
+podAnnotations: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+db:
+  # following settings are required to connect to your timescaledb instance
+  username:
+  password:
+  host:
+  port:
+  database:
+  # run database upgrade (migration) or not
+  upgrade: false
+  # following 2 configs are effective only at first setup
+  # interval in event time that each chunk covers
+  chunkTimeInterval: "1 month"
+  # interval for data retention
+  dataRetentionInterval: "10 years"
+
+parser:
+  # NOTE: `since` setting is disabled in the chart
+  # by default start with first archive (2018-11-03) or from date of last saved launch in db
+  #since:
+  # end date for parsing. leave this empty and set `continuous` to true if you want to contiously parse all events
+  until:
+  # to continue parsing after parsing given range
+  continuous: true
+  deleteOld: false
+
+  image:
+    repository: "bitnik/binder-launches-parser-py"
+    tag: "9ca23e37"
+    pullPolicy: IfNotPresent
+
+  resources:
+    requests:
+      cpu: "0.5"
+      memory: 512Mi
+    limits:
+      cpu: "1"
+      memory: 1Gi
+
+  nodeSelector: {}
