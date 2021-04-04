@@ -33,7 +33,7 @@ jobs:
         id: docker_build_react
         uses: docker/build-push-action@v2
         with:
-          file: ./helm-chart/images/binder_launches/Dockerfile
+          file: ./helm-chart/images/binder-launches/Dockerfile
           push: true
           tags: bitnik/binder-launches:${{ env.CI_SHA_SHORT }}
       - name: Image digest

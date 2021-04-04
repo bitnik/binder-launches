@@ -1,11 +1,11 @@
 {
-  "name": "binder_launches",
+  "name": "binder-launches",
   "version": "0.1.0",
   "description": "A parser to parse mybinder.org launch events and a react table to view them.",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bitnik/binder_launches.git"
+    "url": "git+https://github.com/bitnik/binder-launches.git"
   },
   "keywords": [
     "binder",

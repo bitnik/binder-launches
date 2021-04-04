@@ -3,7 +3,7 @@ repos:
     rev: v3.4.0
     hooks:
     -   id: check-yaml
-        exclude: ^helm-chart/binder_launches/templates/
+        exclude: ^helm-chart/binder-launches/templates/
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
     -   id: requirements-txt-fixer

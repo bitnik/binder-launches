@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "binder_launches.fullname" . }}
+  name: {{ include "binder-launches.fullname" . }}
   labels:
-    {{- include "binder_launches.labels" . | nindent 4 }}
+    {{- include "binder-launches.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -15,4 +15,4 @@ spec:
     nodePort: {{ .Values.service.nodePort }}
     {{- end }}
   selector:
-    {{- include "binder_launches.selectorLabels" . | nindent 4 }}
+    {{- include "binder-launches.selectorLabels" . | nindent 4 }}

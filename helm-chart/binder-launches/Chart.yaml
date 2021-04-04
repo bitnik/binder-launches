@@ -1,5 +1,5 @@
 apiVersion: v2
-name: binder_launches
+name: binder-launches
 version: 0.1.0
 appVersion: "0.1.0"
 # kubeVersion: A SemVer range of compatible Kubernetes versions (optional)
@@ -11,6 +11,6 @@ keywords:
   - table
   - react
   - material
-home: https://github.com/bitnik/binder_launches
+home: https://github.com/bitnik/binder-launches
 sources:
-  - https://github.com/bitnik/binder_launches
+  - https://github.com/bitnik/binder-launches

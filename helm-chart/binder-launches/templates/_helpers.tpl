@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "binder_launches.name" -}}
+{{- define "binder-launches.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "binder_launches.fullname" -}}
+{{- define "binder-launches.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "binder_launches.chart" -}}
+{{- define "binder-launches.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "binder_launches.labels" -}}
-helm.sh/chart: {{ include "binder_launches.chart" . }}
-{{ include "binder_launches.selectorLabels" . }}
+{{- define "binder-launches.labels" -}}
+helm.sh/chart: {{ include "binder-launches.chart" . }}
+{{ include "binder-launches.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,15 +45,15 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "binder_launches.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "binder_launches.name" . }}
+{{- define "binder-launches.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "binder-launches.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create database url
 */}}
-{{- define "binder_launches.dbURL" }}
+{{- define "binder-launches.dbURL" }}
 {{- with .Values.db }}
 {{- required "A db username (.Values.db.username) is required!" .username }}:
 {{- required "A db password (.Values.db.password) is required!" .password }}@

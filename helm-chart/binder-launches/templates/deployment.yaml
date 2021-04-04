@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "binder_launches.fullname" . }}
+  name: {{ include "binder-launches.fullname" . }}
   labels:
-    {{- include "binder_launches.labels" . | nindent 4 }}
+    {{- include "binder-launches.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "binder_launches.selectorLabels" . | nindent 6 }}
+      {{- include "binder-launches.selectorLabels" . | nindent 6 }}
   strategy:
     type: RollingUpdate
   template:
@@ -20,7 +20,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "binder_launches.selectorLabels" . | nindent 8 }}
+        {{- include "binder-launches.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}

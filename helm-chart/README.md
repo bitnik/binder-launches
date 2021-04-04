@@ -21,7 +21,7 @@ db:
 Then install with
 
 ```bash
-helm install binder-launches ./binder_launches -f config.yaml
+helm install binder-launches ./binder-launches -f config.yaml
 ```
 
-For more configuration please have a look at [values.yaml](binder_launches/values.yaml).
+For more configuration please have a look at [values.yaml](binder-launches/values.yaml).
