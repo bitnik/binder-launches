@@ -9,7 +9,7 @@ save into [TimescaleDB](https://docs.timescale.com/latest/main)
 
 ## Helm chart
 
-If you want to install it as helm chart, have a look at the [documentation for helm chart](helm_chart).
+If you want to install it as helm chart, have a look at the [documentation for helm chart](helm-chart).
 
 ## Local development
 

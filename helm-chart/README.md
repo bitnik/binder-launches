@@ -24,4 +24,4 @@ Then install with
 helm install binder-launches ./binder_launches -f config.yaml
 ```
 
-For more configuration please have a look at [values.yaml](helm_chart/binder_launches/values.yaml).
+For more configuration please have a look at [values.yaml](binder_launches/values.yaml).
