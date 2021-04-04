@@ -11,7 +11,7 @@ First create a config.yaml
 ```yaml
 db:
   username:
-  # todo in secret
+  # NOTE: put password into a secret file
   password:
   host:
   port:
