@@ -16,6 +16,8 @@ db:
   host:
   port:
   database:
+  # if you install the chart for the first time set `upgrade` to true
+  upgrade: true
 ```
 
 Then install with
