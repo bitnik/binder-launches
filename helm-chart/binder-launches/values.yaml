@@ -2,7 +2,7 @@ debug: false
 replicaCount: 1
 image:
   repository: "bitnik/binder-launches"
-  tag: "9ca23e37"
+  tag: "d9fa984c"
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -53,7 +53,7 @@ parser:
 
   image:
     repository: "bitnik/binder-launches-parser-py"
-    tag: "9ca23e37"
+    tag: "d9fa984c"
     pullPolicy: IfNotPresent
 
   resources:
