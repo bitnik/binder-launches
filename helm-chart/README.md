@@ -10,12 +10,13 @@ First create a config.yaml
 
 ```yaml
 db:
+  # NOTE: put db information into a secret file
   username:
-  # NOTE: put password into a secret file
   password:
   host:
   port:
   database:
+
   # if you install the chart for the first time set `upgrade` to true
   upgrade: true
 ```
