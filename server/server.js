@@ -164,7 +164,7 @@ app.get('/launches', function(req, res) {
     if (groupby.length > 0) {
         query['attributes'] = groupbyAttributes;
         query['group'] = groupby;
-        query['order'] = [[sequelize.col('count'), order_]];
+        query['order'] = [[sequelize.col('count'), 'DESC']];
     }
     Launch.findAll(
         query
