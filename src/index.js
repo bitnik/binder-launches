@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import LaunchesDataTable from './LaunchesDataGrid';
 import ErrorSnackbar from './Snackbar';
 
+const path = require('path');
 
 function dateToYMD(date) {
   var d = date.getDate();
@@ -133,7 +134,7 @@ class BinderLaunches extends React.Component {
     if (page) {
       urlPart = urlPart + '&page=' + page;
     }
-    const url = '/launches' + urlPart;
+    const url = path.join(window.location.pathname, '/launches' + urlPart)
     console.log(url);
     // fetch the launches
     fetch(url)
@@ -180,7 +181,7 @@ class BinderLaunches extends React.Component {
   }
 
   fetchConfig() {
-    const url = '/config';
+    const url = path.join(window.location.pathname, '/config')
     const origins = [];
     const providers = [];
     console.log(url);

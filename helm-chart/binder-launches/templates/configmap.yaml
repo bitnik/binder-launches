@@ -6,6 +6,9 @@ data:
   # `|-` is for declaring a multi-line string
   config.js: |-
     const config = {
+    {{- if .Values.baseUrl }}
+    baseUrl: {{ .Values.baseUrl | quote }},
+    {{- end }}
     {{- if .Values.port }}
     port: {{ .Values.port }},
     {{- end }}

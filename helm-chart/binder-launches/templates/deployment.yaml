@@ -25,6 +25,12 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          {{- if .Values.baseUrl }}
+          {{- if ne .Values.baseUrl "/" }}
+          command: ["/bin/sh"]
+          args: ["-c", 'sed -i -e "s?\"homepage\": \"/\"?\"homepage\": \"{{ .Values.baseUrl }}\"?g" package.json && npm run build && npm run start-server']
+          {{- end }}
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

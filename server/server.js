@@ -15,6 +15,11 @@ if (fs.existsSync(path.join(__dirname, 'config.js'))) {
     if (!('port' in config)) {
         config['port'] = 3001;
     }
+    if (!('baseUrl' in config)) {
+        config['baseUrl'] = '/';
+    } else if (config['baseUrl'].endsWith('/')) {
+        config['baseUrl'] = config['baseUrl'].slice(0, -1); ;
+    }
 } else {
     throw 'Please provide "config.js" for configuration.';
 }
@@ -67,14 +72,15 @@ app.use(express.json());
 
 // serve static files and index.html at root
 const react_build = path.join(__dirname, '..', 'build');
-app.use(express.static(react_build))
+app.use(config.baseUrl, express.static(react_build))
 // app.get('/', (req, res) => res.status(200).sendFile(path.join(react_build, 'index.html')));
 
 // config variables for data table
 let ORIGINS = [];
 let PROVIDERS = [];
 
-app.get('/launches', function(req, res) {
+var router = express.Router()
+router.get('/launches', function(req, res) {
     logger.debug(req.query)
     // filters
     // NOTE: datetimes come in user's timezone and converted into UTC in the query
@@ -178,7 +184,7 @@ app.get('/launches', function(req, res) {
         });
 });
 
-app.get('/config', function (req, res) {
+router.get('/config', function (req, res) {
     const origins = Launch.findAll({
         attributes: [
             'origin',
@@ -239,4 +245,5 @@ app.get('/config', function (req, res) {
     });
   })
 
+app.use(config.baseUrl, router)
 app.listen(port, () => logger.info(`Example app listening at http://localhost:${port}`));
