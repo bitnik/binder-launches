@@ -43,6 +43,7 @@ db:
   chunkTimeInterval: "1 month"
   # interval for data retention
   dataRetentionInterval: "10 years"
+  ssl: true
 
 parser:
   # NOTE: `since` setting is disabled in the chart
