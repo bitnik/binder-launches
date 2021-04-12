@@ -23,6 +23,7 @@ jobs:
         with:
           python-version: 3.7
 
+      # https://github.com/helm/chart-testing-action
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.0.1
 
