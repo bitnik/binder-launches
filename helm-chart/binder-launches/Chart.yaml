@@ -14,3 +14,6 @@ keywords:
 home: https://github.com/bitnik/binder-launches
 sources:
   - https://github.com/bitnik/binder-launches
+maintainers:
+  - name: bitnik
+    url: https://github.com/bitnik

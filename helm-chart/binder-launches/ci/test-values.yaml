@@ -1,0 +1,8 @@
+# this values are used in ci: .github/workflows/chart_testing.yml
+db:
+  username: "postgres"
+  password: "postgres"
+  host: localhost
+  port: 5433
+  database: "postgres"
+  upgrade: true
