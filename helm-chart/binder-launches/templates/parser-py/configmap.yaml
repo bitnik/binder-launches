@@ -12,13 +12,13 @@ data:
     [database]
     # url = postgresql+psycopg2://{{ include "binder-launches.dbURL" . | quote }}
     url = postgresql+psycopg2://{{ template "binder-launches.dbURL" . }}
-    {{- if .Values.parser.upgrade }}
+    {{- if .Values.db.upgrade }}
     upgrade = {{ .Values.db.upgrade }}
     {{- end }}
-    {{- if .Values.parser.chunkTimeInterval }}
+    {{- if .Values.db.chunkTimeInterval }}
     chunk_time_interval = {{ .Values.db.chunkTimeInterval }}
     {{- end }}
-    {{- if .Values.parser.dataRetentionInterval }}
+    {{- if .Values.db.dataRetentionInterval }}
     data_retention_interval = {{ .Values.db.dataRetentionInterval }}
     {{- end }}
 
