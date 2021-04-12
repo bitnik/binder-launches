@@ -12,12 +12,8 @@ data:
     {{- if .Values.port }}
     port: {{ .Values.port }},
     {{- end }}
-    {{- if .Values.debug }}
     debug: {{ .Values.debug }},
-    {{- end }}
-    {{- if .Values.db.ssl }}
     dbSSL: {{ .Values.db.ssl }},
-    {{- end }}
     //db: "postgres://{{ template "binder-launches.dbURL" . }}"
     db: {{ printf "postgres://%s" (include "binder-launches.dbURL" .) | quote }}
     };
