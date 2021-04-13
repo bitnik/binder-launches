@@ -5,7 +5,7 @@ baseUrl: "/"
 replicaCount: 1
 image:
   repository: "bitnik/binder-launches"
-  tag: "fd1b360e"
+  tag: "19d6e816"
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -57,7 +57,7 @@ parser:
 
   image:
     repository: "bitnik/binder-launches-parser-py"
-    tag: "fd1b360e"
+    tag: "19d6e816"
     pullPolicy: IfNotPresent
 
   resources:
