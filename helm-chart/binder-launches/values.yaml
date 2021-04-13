@@ -5,7 +5,7 @@ baseUrl: "/"
 replicaCount: 1
 image:
   repository: "bitnik/binder-launches"
-  tag: "6f85ec52"
+  tag: "19d6e816"
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -48,7 +48,7 @@ db:
 parser:
   # NOTE: `since` setting is disabled in the chart
   # by default start with first archive (2018-11-03) or from date of last saved launch in db
-  #since:
+  # since:
   # end date for parsing. leave this empty and set `continuous` to true if you want to contiously parse all events
   until:
   # to continue parsing after parsing given range
@@ -57,7 +57,7 @@ parser:
 
   image:
     repository: "bitnik/binder-launches-parser-py"
-    tag: "6f85ec52"
+    tag: "19d6e816"
     pullPolicy: IfNotPresent
 
   resources:

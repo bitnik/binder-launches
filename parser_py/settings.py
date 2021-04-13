@@ -44,7 +44,7 @@ def load_settings() -> dict:
     if "upgrade" in config["database"]:
         db_upgrade = config["database"].getboolean("upgrade")
     else:
-        db_upgrade = True
+        db_upgrade = False
     chunk_time_interval = config["database"].get("chunk_time_interval", "1 month")
     data_retention_interval = config["database"].get(
         "data_retention_interval", "12 months"

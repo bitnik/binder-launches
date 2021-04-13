@@ -24,7 +24,14 @@ db:
 Then install with
 
 ```bash
-helm install binder-launches ./binder-launches -f config.yaml
+# add the binder-launches chart repo
+helm repo add binder-launches https://bitnik.github.io/binder-launches/
+# update charts
+helm repo update
+# install
+helm upgrade binder-launches binder-launches/binder-launches --version=0.1.1 --install -f config.yaml
 ```
 
 For more configuration please have a look at [values.yaml](binder-launches/values.yaml).
+
+At [https://bitnik.github.io/binder-launches/](https://bitnik.github.io/binder-launches/) you can find all helm chart releases.

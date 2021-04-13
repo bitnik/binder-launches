@@ -27,7 +27,7 @@ debug =
 [database]
 # database url is required
 url = postgresql+psycopg2://username:password@host:port/database
-# run database upgrade (migration) or not. default is true
+# run database upgrade (migration) or not. default is false
 upgrade =
 # following 2 configs are effective only at first setup
 # interval in event time that each chunk covers. default is 1 month
@@ -40,7 +40,7 @@ data_retention_interval =
 since =
 # end date for parsing. default is date of previous day.
 until =
-# to continue parsing after parsing given range or not. default is true
+# to continue parsing after parsing given range or not. default is false
 continuous =
 ```
 

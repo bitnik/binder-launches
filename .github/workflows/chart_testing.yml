@@ -1,0 +1,63 @@
+name: Lint and Test Charts
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.5.3
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      # https://github.com/helm/chart-testing-action
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.0.1
+
+
+      - name: Run chart-testing (list-changed)
+        id: list-changed
+        run: |
+          changed=$(ct list-changed --chart-dirs helm-chart --target-branch main --print-config)
+          if [[ -n "$changed" ]]; then
+            echo "::set-output name=changed::true"
+          fi
+
+      - name: Run chart-testing (lint)
+        run: |
+          ct lint --chart-dirs helm-chart --target-branch main \
+          --chart-yaml-schema .github/workflows/etc/chart_schema.yaml --lint-conf .github/workflows/etc/lintconf.yaml \
+          --print-config --debug
+
+      - name: Public IP
+        id: ip
+        uses: haythem/public-ip@v1.2
+
+      - name: run timescaledb
+        run: |
+          docker run -d --name timescaledb -p 5433:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=postgres -e POSTGRES_USER=postgres timescale/timescaledb:2.1.1-pg13
+          sed -i -e "s?host: localhost?host: ${{ steps.ip.outputs.ipv4 }}?g" helm-chart/binder-launches/ci/test-values.yaml
+          cat helm-chart/binder-launches/ci/test-values.yaml
+        if: steps.list-changed.outputs.changed == 'true'
+
+      - name: Create kind cluster
+        uses: helm/kind-action@v1.0.0
+        if: steps.list-changed.outputs.changed == 'true'
+
+      - name: Run chart-testing (install)
+        run: |
+          ct install --chart-dirs helm-chart --target-branch main \
+          --print-config --debug
