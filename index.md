@@ -1,5 +1,6 @@
 <html>
 <body>
+<p>For more information please visit <a href="https://github.com/bitnik/binder-launches">https://github.com/bitnik/binder-launches</a></p>
 <h2>Releases</h2>
 <table>
   <tr>
