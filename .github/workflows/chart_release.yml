@@ -3,8 +3,6 @@ name: Release Charts
 on:
   push:
     branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
 
 jobs:
   release:
@@ -30,14 +28,6 @@ jobs:
         uses: helm/chart-testing-action@v2.0.1
 
 
-      - name: Run chart-testing (list-changed)
-        id: list-changed
-        run: |
-          changed=$(ct list-changed --chart-dirs helm-chart --target-branch main --print-config)
-          if [[ -n "$changed" ]]; then
-            echo "::set-output name=changed::true"
-          fi
-
       # https://github.com/helm/chart-releaser-action
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.2.0
@@ -45,4 +35,3 @@ jobs:
           charts_dir: helm-chart
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-        if: steps.list-changed.outputs.changed == 'true'
