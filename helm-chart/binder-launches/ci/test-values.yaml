@@ -1,4 +1,4 @@
-# this values are used in ci: .github/workflows/chart_testing.yml
+# these values are used in ci: .github/workflows/chart_testing.yml
 db:
   username: "postgres"
   password: "postgres"
