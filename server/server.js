@@ -40,19 +40,31 @@ const app = express();
 app.use(expressLogger);
 const port = config.port;
 
-const sequelize = new Sequelize(config.db,
-    {
-        // https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html
-        dialect: 'postgres',
-        protocol: 'postgres',
-        dialectOptions: {
-            ssl: {
-                require: config.dbSSL,
-                rejectUnauthorized: false
-            }
-        },
-        logging: config.debug
-    });
+let sequelize;
+if (config.dbSSL){
+    sequelize = new Sequelize(config.db,
+        {
+            // https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html
+            dialect: 'postgres',
+            protocol: 'postgres',
+            dialectOptions: {
+                ssl: {
+                    require: true,
+                    rejectUnauthorized: false
+                }
+            },
+            logging: config.debug
+        });
+} else {
+    sequelize = new Sequelize(config.db,
+        {
+            // https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html
+            dialect: 'postgres',
+            protocol: 'postgres',
+            logging: config.debug
+        });
+}
+
 
 // init Launch model
 const Launch = _Launch(sequelize, DataTypes);
