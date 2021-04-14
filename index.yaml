@@ -3,6 +3,28 @@ entries:
   binder-launches:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2021-04-14T08:51:19.299445055Z"
+    description: A Helm chart for Kubernetes
+    digest: 5ad23ebdd372747b452aeda3b2861db79a96f6a9074e018301b86a055bb256af
+    home: https://github.com/bitnik/binder-launches
+    keywords:
+    - binder
+    - launches
+    - table
+    - react
+    - material
+    maintainers:
+    - name: bitnik
+      url: https://github.com/bitnik
+    name: binder-launches
+    sources:
+    - https://github.com/bitnik/binder-launches
+    type: application
+    urls:
+    - https://github.com/bitnik/binder-launches/releases/download/binder-launches-0.1.3/binder-launches-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2021-04-14T06:58:31.877151222Z"
     description: A Helm chart for Kubernetes
     digest: 569a180cf0896372f2ff6848c3e4b6d4d81885a65c147abc10e0afadade9ac75
@@ -45,4 +67,4 @@ entries:
     urls:
     - https://github.com/bitnik/binder-launches/releases/download/binder-launches-0.1.1/binder-launches-0.1.1.tgz
     version: 0.1.1
-generated: "2021-04-14T06:58:31.877166523Z"
+generated: "2021-04-14T08:51:19.299455355Z"
