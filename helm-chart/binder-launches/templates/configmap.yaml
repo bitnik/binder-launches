@@ -11,9 +11,6 @@ data:
     {{- if .Values.baseUrl }}
     baseUrl: {{ .Values.baseUrl | quote }},
     {{- end }}
-    {{- if .Values.db.port }}
-    port: {{ .Values.db.port }},
-    {{- end }}
     {{- if not (kindIs "invalid" .Values.debug) }}
     debug: {{ .Values.debug }},
     {{- end }}
