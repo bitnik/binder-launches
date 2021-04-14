@@ -29,7 +29,7 @@ helm repo add binder-launches https://bitnik.github.io/binder-launches/
 # update charts
 helm repo update
 # install
-helm upgrade binder-launches binder-launches/binder-launches --version=0.1.1 --install -f config.yaml
+helm upgrade binder-launches binder-launches/binder-launches --version=0.1.3 --install -f config.yaml
 ```
 
 For more configuration please have a look at [values.yaml](binder-launches/values.yaml).
