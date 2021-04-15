@@ -5,7 +5,7 @@ save into [TimescaleDB](https://docs.timescale.com/latest/main)
 2. a frontend to visualize launches using [React](https://reactjs.org/) with [Material-UI](https://material-ui.com/) which is backed by
 [Express.js](https://expressjs.com/)
 
-![bl](https://user-images.githubusercontent.com/6059799/112322902-97465100-8cb1-11eb-93e3-88dd3da3d35b.gif)
+An instance is running at GESIS Notebooks: https://notebooks.gesis.org/binderlaunches/
 
 ## Helm chart
 
