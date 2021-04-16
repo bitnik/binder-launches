@@ -11,14 +11,6 @@ import ErrorSnackbar from './Snackbar';
 
 const path = require('path');
 
-function dateToYMD(date) {
-  var d = date.getDate();
-  var m = date.getMonth() + 1;
-  var y = date.getFullYear();
-  return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
-}
-
-
 class BinderLaunches extends React.Component {
   constructor(props) {
     super(props);
@@ -30,12 +22,9 @@ class BinderLaunches extends React.Component {
     // attributes to hold filter values
     // We dont want to hold every selected value in state, because we want to update the table only when Refresh button is clicked
     // by default show launches in last 24 hours
-    // dont use toISOString because it converts the date to UTC
-    // this.selectedFromDT = new Date(new Date(new Date().setDate(new Date().getDate()-1)).setSeconds(0,0)).toISOString();
-    this.selectedFromDT = new Date(new Date(new Date().setDate(new Date().getDate()-1)).setSeconds(0,0));
-    this.selectedFromDT = dateToYMD(this.selectedFromDT) + 'T' + this.selectedFromDT.toLocaleString('en-GB').split(', ')[1];
-    this.selectedToDT = new Date(new Date().setSeconds(0,0));
-    this.selectedToDT = dateToYMD(this.selectedToDT) + 'T' + this.selectedToDT.toLocaleString('en-GB').split(', ')[1];
+    // NOTE: toISOString converts datetime into UTC, which is good because in the query to API we use UTC
+    this.selectedFromDT = new Date(new Date(new Date().setDate(new Date().getDate()-1)).setSeconds(0,0)).toISOString();
+    this.selectedToDT = new Date(new Date().setSeconds(0,0)).toISOString();
     this.descOrder = true;
     this.selectedOrigins = [];
     this.selectedProviders = [];
@@ -43,6 +32,7 @@ class BinderLaunches extends React.Component {
     this.lastLaunchTS = null;
     this.selectedRepo = '';
     this.selectedGroupBy = '';
+    // console.log("--", this.selectedFromDT, this.selectedToDT)
 
     // if there are query params in hash, use them to set the default values
     this.urlHash = window.location.hash;
@@ -246,8 +236,9 @@ class BinderLaunches extends React.Component {
     this.descOrder = document.getElementById("order-switch").checked;
     this.selectedGroupBy = document.getElementById("groupby-select").value;
     this.setState({
-      fromDT: this.selectedFromDT,
-      toDT: this.selectedToDT,
+      // NOTE: toISOString converts datetime into UTC, which is good because in the query to API we use UTC
+      fromDT: new Date(this.selectedFromDT).toISOString(),
+      toDT: new Date(this.selectedToDT).toISOString(),
       descOrder: this.descOrder,
       selectedOrigins: this.selectedOrigins,
       selectedProviders: this.selectedProviders,
