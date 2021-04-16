@@ -40,31 +40,23 @@ const app = express();
 app.use(expressLogger);
 const port = config.port;
 
-let sequelize;
-if (config.dbSSL){
-    sequelize = new Sequelize(config.db,
-        {
-            // https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html
-            dialect: 'postgres',
-            protocol: 'postgres',
-            dialectOptions: {
-                ssl: {
-                    require: true,
-                    rejectUnauthorized: false
-                }
-            },
-            logging: config.debug
-        });
-} else {
-    sequelize = new Sequelize(config.db,
-        {
-            // https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html
-            dialect: 'postgres',
-            protocol: 'postgres',
-            logging: config.debug
-        });
-}
-
+const sslOptions = config.dbSSL ?
+                    {
+                        require: false,
+                        rejectUnauthorized: false,
+                    } : {};
+const sequelize = new Sequelize(config.db,
+    {
+        // https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html
+        dialect: 'postgres',
+        protocol: 'postgres',
+        // timezone: '+00:00',
+        dialectOptions: {
+            ssl: sslOptions,
+            useUTC: true,
+        },
+        logging: config.debug
+    });
 
 // init Launch model
 const Launch = _Launch(sequelize, DataTypes);
@@ -98,7 +90,7 @@ var router = express.Router()
 router.get('/launches', function(req, res) {
     logger.debug(req.query)
     // filters
-    // NOTE: datetimes come in user's timezone and converted into UTC in the query
+    // NOTE: datetimes come in UTC
     if (Number.isNaN(Date.parse(req.query.from)) || Number.isNaN(Date.parse(req.query.to))) {
         res.status(400).json({'error': 'Bad Request: please provide a valid datetime', 'status': 400});
         return;

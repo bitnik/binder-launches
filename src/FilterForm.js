@@ -63,6 +63,18 @@ function DateAndTimePicker(props) {
   );
 }
 
+function convertFormat(datetime) {
+  // convert datetime to yyyy-MM-ddThh:mm:ss for DateAndTimePicker
+  datetime = new Date(datetime);
+  const d = datetime.getDate();
+  const m = datetime.getMonth() + 1;
+  const y = datetime.getFullYear();
+  let newDatetime = '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+  newDatetime = newDatetime + 'T' + datetime.toLocaleString('en-GB').split(', ')[1];
+  console.log("++", datetime, newDatetime);
+  return newDatetime
+}
+
 function OrderSwitch(props) {
   const classes = useStyles();
   const [state, setState] = React.useState(props.defaultValue);
@@ -241,14 +253,14 @@ export default function FilterForm(props) {
           key="from-dt"
           id="from-dt"
           label="From"
-          defaultValue={props.fromDT}
+          defaultValue={convertFormat(props.fromDT)}
           onChange={props.handleSelectDateTimeChange}
         />
         <DateAndTimePicker
           key="to-dt"
           id="to-dt"
           label="To"
-          defaultValue={props.toDT}
+          defaultValue={convertFormat(props.toDT)}
           onChange={props.handleSelectDateTimeChange}
         />
         <OrderSwitch
