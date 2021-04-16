@@ -71,7 +71,7 @@ function convertFormat(datetime) {
   const y = datetime.getFullYear();
   let newDatetime = '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
   newDatetime = newDatetime + 'T' + datetime.toLocaleString('en-GB').split(', ')[1];
-  console.log("++", datetime, newDatetime);
+  // console.log("++", datetime, newDatetime);
   return newDatetime
 }
 
